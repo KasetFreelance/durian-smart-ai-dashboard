@@ -1,9 +1,8 @@
-// app/durian-ai-dashboard/page.jsx
 "use client";
 
 import { useEffect, useState } from "react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "../components/ui/card";
+import { Button } from "../components/ui/button";
 import { Loader2 } from "lucide-react";
 
 export default function DurianAIDashboard() {
@@ -28,21 +27,22 @@ export default function DurianAIDashboard() {
   }, []);
 
   return (
-    <div className="p-6 max-w-3xl mx-auto grid gap-6">
-      <h1 className="text-3xl font-bold text-green-800">📡 รายงานจาก AI ทุเรียน</h1>
+    <div className="p-4 grid gap-4">
+      <h1 className="text-2xl font-bold">📡 รายงานจาก AI ทุเรียน</h1>
 
       <Button onClick={fetchAIReport} disabled={loading}>
-        {loading && <Loader2 className="animate-spin w-4 h-4 mr-2" />}
-        {loading ? "กำลังโหลด..." : "อัปเดตข้อมูลล่าสุด"}
+        {loading ? <Loader2 className="animate-spin w-4 h-4 mr-2" /> : null}
+        อัปเดตข้อมูลล่าสุด
       </Button>
 
       {data ? (
-        <div className="grid gap-6">
-          {/* Weather Section */}
+        <div className="grid gap-4">
           <Card>
             <CardContent className="p-4">
-              <h2 className="text-xl font-semibold mb-2">🌤️ สภาพอากาศ & คำแนะนำ</h2>
-              <ul className="list-disc pl-6 text-gray-800">
+              <h2 className="text-xl font-semibold mb-2">
+                🌤️ สภาพอากาศ & คำแนะนำ
+              </h2>
+              <ul className="list-disc pl-6">
                 {data.weatherWarnings.map((w, i) => (
                   <li key={i}>{w}</li>
                 ))}
@@ -50,16 +50,19 @@ export default function DurianAIDashboard() {
             </CardContent>
           </Card>
 
-          {/* Tree Alert Section */}
           <Card>
             <CardContent className="p-4">
-              <h2 className="text-xl font-semibold mb-2">🌳 ต้นไม้ที่ควรดูแล</h2>
+              <h2 className="text-xl font-semibold mb-2">
+                🌳 ต้นไม้ที่ควรดูแล
+              </h2>
               {data.treeAlerts.length === 0 ? (
-                <p className="text-green-700">✅ ทุกต้นได้รับการดูแลดีแล้ว</p>
+                <p>✅ ทุกต้นได้รับการดูแลดีแล้ว</p>
               ) : (
                 data.treeAlerts.map((tree, i) => (
                   <div key={i} className="mb-4">
-                    <h3 className="font-semibold text-red-700">{tree.tree}</h3>
+                    <h3 className="font-semibold text-red-700">
+                      {tree.tree}
+                    </h3>
                     <ul className="list-disc pl-6 text-red-600">
                       {tree.issues.map((issue, j) => (
                         <li key={j}>{issue}</li>
@@ -71,8 +74,8 @@ export default function DurianAIDashboard() {
             </CardContent>
           </Card>
         </div>
-      ) : (
-        !loading && <p className="text-red-600">❗ ไม่สามารถโหลดข้อมูล AI ได้</p>
+      ) : loading ? null : (
+        <p>❗ ไม่สามารถโหลดข้อมูล AI ได้</p>
       )}
     </div>
   );
