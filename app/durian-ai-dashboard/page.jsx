@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Card, CardContent } from "../components/ui/card";
-import { Button } from "../components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
 
 export default function DurianAIDashboard() {
@@ -39,9 +39,7 @@ export default function DurianAIDashboard() {
         <div className="grid gap-4">
           <Card>
             <CardContent className="p-4">
-              <h2 className="text-xl font-semibold mb-2">
-                🌤️ สภาพอากาศ & คำแนะนำ
-              </h2>
+              <h2 className="text-xl font-semibold mb-2">🌤️ สภาพอากาศ & คำแนะนำ</h2>
               <ul className="list-disc pl-6">
                 {data.weatherWarnings.map((w, i) => (
                   <li key={i}>{w}</li>
@@ -52,17 +50,13 @@ export default function DurianAIDashboard() {
 
           <Card>
             <CardContent className="p-4">
-              <h2 className="text-xl font-semibold mb-2">
-                🌳 ต้นไม้ที่ควรดูแล
-              </h2>
+              <h2 className="text-xl font-semibold mb-2">🌳 ต้นไม้ที่ควรดูแล</h2>
               {data.treeAlerts.length === 0 ? (
                 <p>✅ ทุกต้นได้รับการดูแลดีแล้ว</p>
               ) : (
                 data.treeAlerts.map((tree, i) => (
                   <div key={i} className="mb-4">
-                    <h3 className="font-semibold text-red-700">
-                      {tree.tree}
-                    </h3>
+                    <h3 className="font-semibold text-red-700">{tree.tree}</h3>
                     <ul className="list-disc pl-6 text-red-600">
                       {tree.issues.map((issue, j) => (
                         <li key={j}>{issue}</li>
